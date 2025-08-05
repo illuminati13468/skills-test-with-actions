@@ -3,6 +3,9 @@ import math
 
 # Installed Modules
 # - None
+#@professortocat, I've run my coverage report.
+#(Seems there is some opportunity to increase the test coverage. 🧐
+#(What should we do next?
 
 
 def area_of_circle(radius):
