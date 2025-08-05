@@ -8,6 +8,7 @@ import os
 # Project Modules
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 from calculations import area_of_circle, get_nth_fibonacci   # noqa: E402
+import pytest
 
 
 def test_area_of_circle_positive_radius():
@@ -34,16 +35,67 @@ def test_area_of_circle_zero_radius():
     assert result == 0
 
 
+def test_area_of_circle_large_radius():
+    """Test with a large radius."""
+    radius = 1000
+    result = area_of_circle(radius)
+    assert abs(result - (3.141592653589793 * 1000 ** 2)) < 1e-5
+
+
+def test_area_of_circle_negative_radius():
+    """Test with a negative radius to raise ValueError."""
+    radius = -5
+    with pytest.raises(ValueError):
+        area_of_circle(radius)
+
+
 def test_get_nth_fibonacci_zero():
     """Test with n=0."""
-    # Arrange
     n = 0
-
-    # Act
     result = get_nth_fibonacci(n)
-
-    # Assert
     assert result == 0
+
+
+def test_get_nth_fibonacci_one():
+    """Test with n=1."""
+    n = 1
+    result = get_nth_fibonacci(n)
+    assert result == 1
+
+
+def test_get_nth_fibonacci_two():
+    """Test with n=2."""
+    n = 2
+    result = get_nth_fibonacci(n)
+    assert result == 1
+
+
+def test_get_nth_fibonacci_five():
+    """Test with n=5."""
+    n = 5
+    result = get_nth_fibonacci(n)
+    assert result == 5
+
+
+def test_get_nth_fibonacci_ten():
+    """Test with n=10."""
+    n = 10
+    result = get_nth_fibonacci(n)
+    assert result == 55
+
+
+def test_get_nth_fibonacci_large():
+    """Test with a large n."""
+    n = 20
+    result = get_nth_fibonacci(n)
+    assert result == 6765
+
+
+def test_get_nth_fibonacci_negative():
+    """Test with a negative number to raise ValueError."""
+    n = -1
+    with pytest.raises(ValueError):
+        get_nth_fibonacci(n)
 
 
 def test_get_nth_fibonacci_one():
